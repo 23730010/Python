@@ -1,0 +1,7 @@
+mssql:
+  server: PC03\\SQLEXPRESS
+  database: QLNV
+  username: sa
+  password: sapassword
+  port: 1433
+  driver: ODBC Driver 17 for SQL Server&charset=utf8
