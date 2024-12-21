@@ -1,29 +1,41 @@
 import tkinter as tk
 from tkinter import messagebox
 
+from qlnv.utilities.NVCommon import NVCommon
+
 
 class LoginView(tk.Tk):
     def __init__(self, controller):
         super().__init__()
         self.__controller = controller
+
+        self.render_ui()
+
+    def render_ui(self):
         self.title("Đăng nhập")
         self.geometry("400x300")
+
+        NVCommon.show_center_of_window(self)
 
         # Tiêu đề
         tk.Label(self, text="Màn hình Đăng nhập", font=("Arial", 16)).pack(pady=20)
 
         # Tên đăng nhập
-        tk.Label(self, text="Tên đăng nhập:").pack(anchor="w", padx=20)
-        self.username_entry = tk.Entry(self, width=30)
-        self.username_entry.pack(pady=5, padx=20)
+        username_frame = tk.Frame(self)
+        username_frame.pack(anchor="w", padx=20, pady=5)
+        tk.Label(username_frame, text="Tên đăng nhập:", width=15, anchor="w").grid(row=0, column=0, sticky="w")
+        self.username_entry = tk.Entry(username_frame, width=30)
+        self.username_entry.grid(row=0, column=1, padx=5)
 
         # Mật khẩu
-        tk.Label(self, text="Mật khẩu:").pack(anchor="w", padx=20)
-        self.password_entry = tk.Entry(self, width=30, show="*")
-        self.password_entry.pack(pady=5, padx=20)
+        password_frame = tk.Frame(self)
+        password_frame.pack(anchor="w", padx=20, pady=5)
+        tk.Label(password_frame, text="Mật khẩu:", width=15, anchor="w").grid(row=0, column=0, sticky="w")
+        self.password_entry = tk.Entry(password_frame, width=30, show="*")
+        self.password_entry.grid(row=0, column=1, padx=5)
 
         # Nút đăng nhập
-        tk.Button(self, text="Đăng nhập", command=self.login).pack(pady=10)
+        tk.Button(self, text="Đăng nhập", width=15, command=self.login).pack(pady=10)
 
         # Liên kết đến màn hình đăng ký
         register_link = tk.Label(
@@ -39,6 +51,6 @@ class LoginView(tk.Tk):
         if username and password:
             result = self.__controller.login(username, password)
             if result == 0:
-                messagebox.showerror("Thông báo", "Sai tên đăng nhập hoặc mật khẩu!")
+                messagebox.showerror("Thông báo", "Sai tên đăng nhập hoặc mật khẩu!", parent=self)
         else:
-            messagebox.showerror("Thông báo", "Sai tên đăng nhập hoặc mật khẩu!")
+            messagebox.showerror("Thông báo", "Vui lòng nhập đầy đủ thông tin đăng nhập!", parent=self)

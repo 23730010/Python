@@ -12,5 +12,9 @@ class NhanVien(ABC):
     def tinh_luong(self):
         pass
 
+    @abstractmethod
+    def is_missing_data(self):
+        pass
+
     def __str__(self):
         return str([self._ma_nv, self._ho_ten, self._luong_cb, self._luong_ht])

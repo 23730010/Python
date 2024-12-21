@@ -49,4 +49,4 @@ class LoginController:
             new_user = User(username, password)
             return self._login_service.insert_user(new_user)
         else:
-            return 0
+            return 2

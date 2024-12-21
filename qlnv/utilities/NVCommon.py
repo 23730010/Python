@@ -14,3 +14,18 @@ class NVCommon:
         if action == "1":  # 1 means insertion
             return value_if_allowed.isdigit()  # Allow only digits
         return True
+
+    @staticmethod
+    def show_center_of_window(root):
+        # Center the popup on the screen
+        root.update_idletasks()  # Ensure the geometry values are updated
+        screen_width = root.winfo_screenwidth()
+        screen_height = root.winfo_screenheight()
+        window_width = root.winfo_width()
+        window_height = root.winfo_height()
+
+        position_x = (screen_width // 2) - (window_width // 2)
+        position_y = (screen_height // 2) - (window_height // 2)
+
+        # Set geometry with calculated center position
+        root.geometry(f"{window_width}x{window_height}+{position_x}+{position_y}")
