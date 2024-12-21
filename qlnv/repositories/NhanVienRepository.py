@@ -24,12 +24,8 @@ class NhanVienRepository:
         )
         self.__engine = create_engine(connection_string, echo=True)
 
-    # Normalize function
-    def remove_accents(input_str):
-        nfkd_form = unicodedata.normalize('NFKD', input_str)
-        return ''.join(c for c in nfkd_form if not unicodedata.combining(c))
-
     def find_all_nv(self):
+        """Find all nv"""
         results = []
         session = None
         try:
@@ -49,46 +45,8 @@ class NhanVienRepository:
         finally:
             session.close()
 
-    def tim_nv_ban_hang(self):
-        # Create session
-        results = []
-        session = None
-        try:
-            Session = sessionmaker(bind=self.__engine)
-            session = Session()
-
-            # Query data
-            nhan_viens = session.query(NhanVienEntity).filter(
-                and_(NhanVienEntity.loai_nv == 2, NhanVienEntity.ma_nv != 0)).all()
-            for nv in nhan_viens:
-                print(nv)
-                results.append(NVBanHang(nv.ma_nv, nv.ho_ten, nv.luong_cb, nv.so_sp, nv.luong_ht))
-            return results
-        except Exception as e:
-            print("Error:", e)
-        finally:
-            session.close()
-
-    def tim_nv_van_phong(self):
-        # Create session
-        results = []
-        session = None
-        try:
-            Session = sessionmaker(bind=self.__engine)
-            session = Session()
-
-            # Query data
-            nhan_viens = session.query(NhanVienEntity).filter(
-                and_(NhanVienEntity.loai_nv == 1, NhanVienEntity.ma_nv != 0)).all()
-            for nv in nhan_viens:
-                results.append(NVVanPhong(nv.ma_nv, nv.ho_ten, nv.luong_cb, nv.so_ng, nv.luong_ht))
-            return results
-        except Exception as e:
-            print("Error:", e)
-        finally:
-            session.close()
-
     def update_nv(self, nv):
+        """Update nv"""
         session = None
         try:
             Session = sessionmaker(bind=self.__engine)
@@ -116,6 +74,7 @@ class NhanVienRepository:
             session.close()
 
     def insert_nv(self, nv):
+        """Insert nv"""
         session = None
         try:
             Session = sessionmaker(bind=self.__engine)
@@ -139,6 +98,7 @@ class NhanVienRepository:
             session.close()
 
     def delete_nv(self, nv):
+        """Delete nv"""
         session = None
         try:
             Session = sessionmaker(bind=self.__engine)
@@ -157,6 +117,7 @@ class NhanVienRepository:
             session.close()
 
     def search_nv_by_manv_hoten(self, ma_nv, ho_ten):
+        """Search nv by ma nv and ho ten"""
         if not ma_nv.strip() and not ho_ten.strip():
             return self.find_all_nv()
         else:

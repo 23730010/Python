@@ -18,6 +18,7 @@ class DanhSachNVView(tk.Tk):
         self.render_ui()
 
     def render_ui(self):
+        """Render UI of QLNV screen"""
         self.title("Danh Sách Nhân Viên")
         self.geometry("810x500")
 
@@ -75,7 +76,7 @@ class DanhSachNVView(tk.Tk):
         self.protocol("WM_DELETE_WINDOW", self.close_window)
 
     def show_nv_list(self, ds):
-
+        """Show list of nv under grid, using canvas"""
         # Create a Canvas for the table
         self.canvas = tk.Canvas(self)
         self.canvas.pack(fill=tk.BOTH, expand=True)
@@ -96,6 +97,7 @@ class DanhSachNVView(tk.Tk):
 
 
     def add_row(self, row_index, row_data):
+        """Add nv to grid"""
         # Thêm từng ô dữ liệu vào Canvas
         label_ma_nv = tk.Label(self.canvas, text=row_data._ma_nv, relief=tk.RIDGE, width=10)
         label_ma_nv.grid(row=row_index, column=0)
@@ -130,38 +132,47 @@ class DanhSachNVView(tk.Tk):
              bt_edit, bt_delete])
 
     def logout_button_click(self):
+        """Click event for logout button"""
         self.__controller.logout()
 
     def search_button_click(self):
+        """Click event for search button"""
         ma_nv = self.ma_nv_entry.get().strip().lower()
         ho_ten = self.ho_ten_entry.get().strip().lower()
         self.refresh_data(self.__controller.search_nv(ma_nv, ho_ten))
 
     def edit_button_click(self, row):
+        """click event for edit button"""
         self.show_edit_popup(row)
 
     def delete_button_click(self, row):
+        """Click event for delete button"""
         self.__controller.delete_nv(row)
         self.refresh_data(self.__controller.refresh_data())
 
     def button_calculate_salary(self, nv):
+        """Click event for calculate salary button"""
         self.__controller.tinh_luong(nv)
         self.refresh_data(self.__controller.refresh_data())
 
     def refresh_data_button_click(self):
+        """Click event for refresh data button"""
         self.refresh_data(self.__controller.refresh_data())
 
     def close_window(self):
+        """Close window"""
         self.destroy()  # This closes the window
 
     # Hàm giả lập tải dữ liệu mới
     def refresh_data(self, ds):
+        """Refresh data on grid"""
         # Xóa các phần tử cũ trên Canvas
         self.delete_button_label()
         for row_index, row_data in enumerate(ds, start=1):
             self.add_row(row_index, row_data)
 
     def delete_button_label(self):
+        """Delete buttons and labels on grid"""
         # Hủy tất cả các Label và button trên canvas
         for item in self.__ds_lable_button:
             item.destroy()
@@ -169,6 +180,7 @@ class DanhSachNVView(tk.Tk):
 
     # Function to show the popup for editing employee details
     def show_edit_popup(self, nv):
+        """Show edit nv popup"""
         # Create a new window (popup) for editing information
         popup = tk.Toplevel(self)
         popup.title("Cập nhật thông tin nhân viên")
@@ -218,6 +230,7 @@ class DanhSachNVView(tk.Tk):
 
         # Function to save the updated information
         def save_changes(nv):
+            """Save the change, used for save button"""
             nv._ho_ten = ho_ten.get()
             nv._luong_cb = luong_cb.get()
             nv._so_sp = so_sp.get() if so_sp != None else None
@@ -239,6 +252,7 @@ class DanhSachNVView(tk.Tk):
 
     # Function to show the popup for editing employee details
     def show_add_popup(self):
+        """Show add nv popup"""
         # Create a new window (popup) for editing information
         popup = tk.Toplevel(self)
         popup.title("Thêm nhân viên")
@@ -295,6 +309,7 @@ class DanhSachNVView(tk.Tk):
 
         # Function to save the updated information
         def save_changes():
+            """Save the new nv, use for save button"""
             nhanvien = None
             ho_ten = ho_ten_entry.get()
             luong_cb = luong_cb_entry.get()

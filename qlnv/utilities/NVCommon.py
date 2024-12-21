@@ -5,18 +5,21 @@ class NVCommon:
     # Normalize function
     @staticmethod
     def remove_accents(input_str):
+        """Remove accents"""
         nfkd_form = unicodedata.normalize('NFKD', input_str)
         return ''.join(c for c in nfkd_form if not unicodedata.combining(c))
 
     # Function to validate numeric input
     @staticmethod
     def validate_number_input(action, value_if_allowed):
+        """Validate number input"""
         if action == "1":  # 1 means insertion
             return value_if_allowed.isdigit()  # Allow only digits
         return True
 
     @staticmethod
     def show_center_of_window(root):
+        """Show the root center of the window"""
         # Center the popup on the screen
         root.update_idletasks()  # Ensure the geometry values are updated
         screen_width = root.winfo_screenwidth()

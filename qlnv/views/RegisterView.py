@@ -12,6 +12,7 @@ class RegisterView(tk.Tk):
         self.render_ui()
 
     def render_ui(self):
+        """Render UI of register screen"""
         self.title("Đăng ký")
         self.geometry("400x230")
 
@@ -48,6 +49,7 @@ class RegisterView(tk.Tk):
 
 
     def register(self):
+        """Perform registering and alert the result"""
         username = self.username_entry.get()
         password = self.password_entry.get()
 

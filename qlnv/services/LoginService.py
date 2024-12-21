@@ -8,11 +8,14 @@ class LoginService:
         self.__encryption = Encryption()
 
     def find_user_by_username(self, username):
+        """Find user by username"""
         return self.__user_repo.find_user_by_username(username)
 
     def insert_user(self, user):
+        """insert user"""
         self.__user_repo.insert_user(user)
 
     def compare_password_and_encoded_password(self, password, encrypt_password):
+        """Compare password and encoded password"""
         password_temp = self.__encryption.decode_password(encrypt_password)
         return password_temp == password

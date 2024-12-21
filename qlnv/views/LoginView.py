@@ -12,8 +12,9 @@ class LoginView(tk.Tk):
         self.render_ui()
 
     def render_ui(self):
+        """Render UI of login screen"""
         self.title("Đăng nhập")
-        self.geometry("400x300")
+        self.geometry("400x230")
 
         NVCommon.show_center_of_window(self)
 
@@ -45,6 +46,7 @@ class LoginView(tk.Tk):
         register_link.bind("<Button-1>", self.__controller.open_register_screen)
 
     def login(self):
+        """Perform login feature"""
         username = self.username_entry.get()
         password = self.password_entry.get()
 

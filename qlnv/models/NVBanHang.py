@@ -11,11 +11,13 @@ class NVBanHang(NhanVien):
 
     @override
     def tinh_luong(self):
+        """Tính lương"""
         self._luong_ht = float(self._luong_cb) + float(self._so_sp) * 18
         return self._luong_ht
 
     @override
     def is_missing_data(self):
+        """Check missing data when adding or editing nv"""
         if not self._ho_ten or not self._luong_cb or not self._so_sp:
             return True
         else:

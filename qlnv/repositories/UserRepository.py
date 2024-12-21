@@ -21,6 +21,7 @@ class UserRepository:
         self.engine = create_engine(connection_string, echo=True)
 
     def find_user_by_username(self, user_name):
+        """find user by username"""
         # Create session
         session = None
         try:
@@ -36,6 +37,7 @@ class UserRepository:
             session.close()
 
     def insert_user(self, user):
+        """insert user"""
         # Create session
         session = None
         try:

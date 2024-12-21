@@ -15,7 +15,3 @@ class CongTy:
     @property
     def get_ten_cty(self):
         return self.__ten_ct
-
-    @property
-    def set_ds(self, ds):
-        self.__ds = ds

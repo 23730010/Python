@@ -5,9 +5,9 @@ from sqlalchemy.ext.declarative import declarative_base
 Base = declarative_base()
 
 
-# Định nghĩa Entity cho bảng `users`
+# Define Entity for `users` table
 class UserEntity(Base):
-    __tablename__ = 'USERS'  # Tên bảng trong cơ sở dữ liệu
+    __tablename__ = 'USERS'  # table name
 
     id = Column(Integer, primary_key=True, autoincrement=True, nullable=False)
     username = Column(String(100), nullable=False)

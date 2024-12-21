@@ -8,9 +8,9 @@ from sqlalchemy.ext.declarative import declarative_base
 Base = declarative_base()
 
 
-# Define a table
+# Define 'NHAN_VIEN' table
 class NhanVienEntity(Base):
-    __tablename__ = 'NHAN_VIEN'
+    __tablename__ = 'NHAN_VIEN'# Table name
 
     ma_nv = Column(Integer, primary_key=True, autoincrement=True)  # Auto-increment field
     ho_ten = Column(String, nullable=False)
